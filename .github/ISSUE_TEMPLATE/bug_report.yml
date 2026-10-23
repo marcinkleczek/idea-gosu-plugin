@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a reproducible problem with Gosu editor support or execution.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: Remove credentials, private paths, and proprietary source from examples and logs.
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include the plugin version, exact IDE build, OS, JDK, and Gosu SDK version (if used).
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps and minimal Gosu example
+      description: Include relevant imports, type declarations, and classpath configuration. Describe where to place the caret for editor actions.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the full error text and relevant sanitized logs or screenshots.
+    validations:
+      required: true

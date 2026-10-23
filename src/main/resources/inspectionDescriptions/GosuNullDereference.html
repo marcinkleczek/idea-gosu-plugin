@@ -1,0 +1,6 @@
+<html><body>Tracks local values through assignments and if/else blocks. Reports calls on null,
+possible null after branches merge, constant comparisons with null, and code after return/throw.
+Understands guard clauses and the ?: fallback; the ?. fix is offered for recognized receivers.
+A primitive result of ?. may be a default value, for example length() returns 0.
+This is not a full compiler analysis: after unknown calls, and in loops, exceptions,
+interpolation, and compound conditions it discards uncertain facts instead of guessing.</body></html>

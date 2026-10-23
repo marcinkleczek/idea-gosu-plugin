@@ -1,0 +1,5 @@
+<html><body>Replaces the call <code>value.method()</code> with <code>value?.method()</code>.
+When the receiver is null, the method is not called. For a reference result the value
+is null; for primitives Gosu may return a default such as 0 for int.
+The action deliberately changes behavior; it does not claim that every variable may be null.
+It does not automatically protect further calls in the chain.</body></html>

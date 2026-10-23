@@ -1,0 +1,39 @@
+<templateSet group="Gosu">
+  <template name="fori" value="for ($VAR$ in $COLLECTION$) {&#10;  $END$&#10;}" description="for loop over a collection" toReformat="true" toShortenFQNames="false">
+    <variable name="VAR" expression="" defaultValue="&quot;item&quot;" alwaysStopAt="true" />
+    <variable name="COLLECTION" expression="" defaultValue="&quot;items&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+  <template name="foreach" value="foreach ($VAR$ in $COLLECTION$) {&#10;  $END$&#10;}" description="foreach loop" toReformat="true" toShortenFQNames="false">
+    <variable name="VAR" expression="" defaultValue="&quot;item&quot;" alwaysStopAt="true" />
+    <variable name="COLLECTION" expression="" defaultValue="&quot;items&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+  <template name="print" value="print($END$)" description="print expression" toReformat="false" toShortenFQNames="false">
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+  <template name="tryc" value="try {&#10;  $SELECTION$&#10;} catch (e : Exception) {&#10;  $END$&#10;}" description="try / catch" toReformat="true" toShortenFQNames="false">
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+  <template name="prop" value="property get $NAME$() : $TYPE$ {&#10;  return $END$&#10;}" description="property getter" toReformat="true" toShortenFQNames="false">
+    <variable name="NAME" expression="" defaultValue="&quot;Name&quot;" alwaysStopAt="true" />
+    <variable name="TYPE" expression="" defaultValue="&quot;String&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+  <template name="fun" value="function $NAME$($END$) {&#10;  &#10;}" description="function" toReformat="true" toShortenFQNames="false">
+    <variable name="NAME" expression="" defaultValue="&quot;name&quot;" alwaysStopAt="true" />
+    <context>
+      <option name="Gosu" value="true" />
+    </context>
+  </template>
+</templateSet>

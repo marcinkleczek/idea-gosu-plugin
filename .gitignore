@@ -1,0 +1,33 @@
+# Build output and downloaded IntelliJ platform files
+.gradle/
+.intellijPlatform/
+build/
+out/
+*.class
+
+# Local IDE and agent configuration
+.idea/
+*.iml
+.vscode/
+.codex/
+.agents/
+
+# Local SDKs and configuration
+local.properties
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs and operating-system files
+*.log
+hs_err_pid*
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Keep the Gradle Wrapper JAR: it is required to build a fresh checkout.

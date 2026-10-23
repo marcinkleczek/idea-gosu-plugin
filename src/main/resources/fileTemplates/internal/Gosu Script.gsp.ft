@@ -1,0 +1,2 @@
+// Gosu script (${NAME})
+print("Hello World")

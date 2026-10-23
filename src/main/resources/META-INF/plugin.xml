@@ -1,0 +1,117 @@
+<idea-plugin>
+  <id>gosu-gsp-support</id>
+  <name>Gosu GSP Support</name>
+  <!-- Overridden at build time by version in build.gradle.kts. -->
+  <version>0.2.0</version>
+  <vendor>Gosu GSP Support contributors</vendor>
+  <description><![CDATA[
+      <p>Gosu support for IntelliJ IDEA. Supports scripts (<code>.gsp</code>),
+      classes (<code>.gs</code>), and enhancements (<code>.gsx</code>).</p>
+      <p>Includes syntax highlighting, completion for Gosu and Java members,
+      automatic imports, navigation between files, type and call hierarchies,
+      and refactoring. Scripts and tests can be run from the editor, with
+      links from console errors back to the source.</p>
+      <p>A local Gosu SDK enables compiler diagnostics as you type.
+      Tested with Gosu 1.18.11. Advanced type inference and refactoring have
+      known limits, and there is no debugger yet.</p>
+    ]]></description>
+
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.java</depends>
+  <depends>intellij.testRunner.plugin</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <intentionAction><className>gosu.gsp.intentions.GosuExplainTypeIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuExplicitTypeIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuCreateFunctionIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuGeneratePropertyIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuImplementIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuOverrideIntention</className><category>Gosu</category></intentionAction>
+    <fileType name="Gosu GSP"
+              implementationClass="gosu.gsp.GosuFileType"
+              language="Gosu"
+              extensions="gsp;gs;gsx"/>
+    <lang.syntaxHighlighterFactory language="Gosu"
+                                       implementationClass="gosu.gsp.highlight.GosuSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="gosu.gsp.highlight.GosuColorSettingsPage"/>
+    <lang.parserDefinition language="Gosu"
+                           implementationClass="gosu.gsp.psi.GosuParserDefinition"/>
+    <lang.psiStructureViewFactory language="Gosu"
+                              implementationClass="gosu.gsp.structure.GosuStructureViewFactory"/>
+    <intentionAction><className>gosu.gsp.intentions.GosuNullSafeIntention</className><category>Gosu</category></intentionAction>
+    <intentionAction><className>gosu.gsp.intentions.GosuNullFallbackIntention</className><category>Gosu</category></intentionAction>
+    <localInspection language="Gosu" implementationClass="gosu.gsp.inspection.GosuNullDereferenceInspection"/>
+    <externalAnnotator language="Gosu" implementationClass="gosu.gsp.compiler.GosuCompilerAnnotator"/>
+    <annotator language="Gosu"
+               implementationClass="gosu.gsp.highlight.GosuAnnotator"/>
+    <lang.braceMatcher language="Gosu"
+                       implementationClass="gosu.gsp.editor.GosuBraceMatcher"/>
+    <lang.commenter language="Gosu"
+                    implementationClass="gosu.gsp.editor.GosuCommenter"/>
+    <lang.findUsagesProvider language="Gosu"
+                             implementationClass="gosu.gsp.editor.GosuFindUsagesProvider"/>
+    <localInspection language="Gosu" implementationClass="gosu.gsp.inspection.GosuMissingImportInspection"/>
+    <localInspection language="Gosu"
+                     implementationClass="gosu.gsp.inspection.GosuUnusedVariableInspection"/>
+    <localInspection language="Gosu"
+                     implementationClass="gosu.gsp.inspection.GosuUnusedUsesInspection"/>
+    <lang.surroundDescriptor language="Gosu"
+                             implementationClass="gosu.gsp.editor.GosuSurroundDescriptor"/>
+    <breadcrumbsInfoProvider
+        implementationClass="gosu.gsp.structure.GosuBreadcrumbsProvider"/>
+    <liveTemplateContext
+        implementation="gosu.gsp.completion.GosuTemplateContextType"/>
+    <defaultLiveTemplates file="/liveTemplates/Gosu.xml"/>
+    <internalFileTemplate name="Gosu Script" subject="Gosu"/>
+    <additionalLibraryRootsProvider implementation="gosu.gsp.settings.GosuLibraryRootsProvider"/>
+    <projectConfigurable parentId="language" id="gosu.settings" displayName="Gosu"
+                         instance="gosu.gsp.settings.GosuConfigurable"/>
+    <configurationType implementation="gosu.gsp.testing.GosuTestConfigurationType"/>
+    <runConfigurationProducer implementation="gosu.gsp.testing.GosuTestProducer"/>
+    <runLineMarkerContributor language="Gosu" implementationClass="gosu.gsp.testing.GosuTestLineMarker"/>
+    <configurationType
+        implementation="gosu.gsp.run.GosuRunConfigurationType"/>
+    <stubElementTypeHolder class="gosu.gsp.stubs.GosuStubElementTypes"/>
+    <stubIndex implementation="gosu.gsp.stubs.GosuStubIndexKeys$Classes"/>
+    <stubIndex implementation="gosu.gsp.stubs.GosuStubIndexKeys$Supertypes"/>
+    <callHierarchyProvider language="Gosu" implementationClass="gosu.gsp.hierarchy.GosuCallHierarchyProvider"/>
+    <typeHierarchyProvider language="Gosu" implementationClass="gosu.gsp.hierarchy.GosuHierarchyProvider"/>
+    <codeInsight.lineMarkerProvider language="Gosu" implementationClass="gosu.gsp.hierarchy.GosuInheritanceMarkers"/>
+    <definitionsScopedSearch implementation="gosu.gsp.hierarchy.GosuDefinitionsSearch"/>
+    <stubIndex implementation="gosu.gsp.stubs.GosuStubIndexKeys$Enhancements"/>
+    <stubIndex implementation="gosu.gsp.stubs.GosuStubIndexKeys$Functions"/>
+    <gotoSymbolContributor
+        implementation="gosu.gsp.stubs.GosuGotoSymbolContributor"/>
+    <lang.formatter language="Gosu"
+                    implementationClass="gosu.gsp.format.GosuFormattingModelBuilder"/>
+    <langCodeStyleSettingsProvider
+        implementation="gosu.gsp.format.GosuCodeStyleSettingsProvider"/>
+    <lang.foldingBuilder language="Gosu"
+                         implementationClass="gosu.gsp.structure.GosuFoldingBuilder"/>
+    <completion.contributor language="Gosu"
+                            implementationClass="gosu.gsp.completion.GosuCompletionContributor"/>
+    <codeInsight.parameterInfo language="Gosu"
+                               implementationClass="gosu.gsp.completion.GosuParameterInfoHandler"/>
+    <lang.documentationProvider language="Gosu"
+                                implementationClass="gosu.gsp.completion.GosuDocumentationProvider"/>
+    <todoIndexer filetype="Gosu GSP"
+                 implementationClass="gosu.gsp.editor.GosuTodoIndexer"/>
+    <quoteHandler fileType="Gosu GSP"
+                  className="gosu.gsp.editor.GosuQuoteHandler"/>
+    <moveHandler implementation="gosu.gsp.refactor.GosuMoveHandler"/>
+    <lang.refactoringSupport language="Gosu"
+                             implementationClass="gosu.gsp.editor.GosuRefactoringSupportProvider"/>
+    <lang.namesValidator language="Gosu"
+                         implementationClass="gosu.gsp.editor.GosuNamesValidator"/>
+    <lang.importOptimizer language="Gosu"
+                          implementationClass="gosu.gsp.editor.GosuImportOptimizer"/>
+    <extendWordSelectionHandler implementation="gosu.gsp.editor.GosuExtendWordSelectionHandler"/>
+    <readWriteAccessDetector implementation="gosu.gsp.editor.GosuReadWriteAccessDetector"/>
+    <runLineMarkerContributor language="Gosu"
+                              implementationClass="gosu.gsp.run.GosuRunLineMarkerContributor"/>
+    <runConfigurationProducer implementation="gosu.gsp.run.GosuRunConfigurationProducer"/>
+    <codeInsight.inlayProvider language="Gosu" implementationClass="gosu.gsp.completion.GosuTypeInlayHintsProvider"/>
+    <codeInsight.inlayProvider language="Gosu"
+                               implementationClass="gosu.gsp.completion.GosuParameterInlayHintsProvider"/>
+  </extensions>
+</idea-plugin>
